@@ -16,8 +16,8 @@ var ring_location = 0.73;
 declareattribute("ring_location", null, null, 1);
 var point_color = [1,1,1,1];
 declareattribute("point_color", null, null, 1);
-
-
+var background_color = [0., 0., 0., 0.];
+declareattribute("background_color", null, null, 1);
 
 var Right = 4.713323;
 var Left = 4.713323;
@@ -68,7 +68,14 @@ function offs(x) {
 	}
 	
 function paint() {
-	
+	if (background_color[3]) {
+		var width = box.rect[2] - box.rect[0];
+		var height = box.rect[3] - box.rect[1];
+		var aspect = width / height;
+		m.set_source_rgba(background_color[0], background_color[1], background_color[2], background_color[3]);
+		m.rectangle(-aspect, 1, 2*aspect, 2);
+		m.fill();
+	}
 	m.arc(0., 0., ring_location, Left, Right);
 	m.set_source_rgba(ring_color[0], ring_color[1], ring_color[2], ring_color[3]);
 	m.set_line_width(line_thickness);
